@@ -25,6 +25,12 @@ function getComputerChoice() {
     return computer;
 }
 
+// function to get player selection from buttons
+function getPlayerChoice(e) {
+    console.log(e.target.innerText);
+    game(e.target.innerText.toLowerCase())
+}
+
 // function to play a round of the game
 function playRound(playerSelection, computerSelection) {
     let result = "";
@@ -84,17 +90,12 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-// modify this function so that the player selection is a function 
-// from a button press, and the button is passed as an arg
+// game is to be played for 5 rounds
 function game(pChoice) {
-    // play 5 games
-    //for (let i = 0; i < 1; i++) {   // TODO: change back to 5
-        //let player = prompt("Rock, Paper, or Scissors? (Case doesn't matter. Go wYld.)").toLowerCase();
-        // let outcome = playRound(player, getComputerChoice());
-        let outcome = playRound(pChoice, getComputerChoice());
-        console.log(outcome);
-        roundsPlayed++;
-    //}
+
+    let outcome = playRound(pChoice, getComputerChoice());
+    console.log(outcome);
+    roundsPlayed++;
 
     if (roundsPlayed === 5) {
         console.log(playerWins);
@@ -108,34 +109,22 @@ function game(pChoice) {
         else {
             console.log("Overall tie!");
         }
+        // reset counters to give option of playing again
         roundsPlayed = 0;
         playerWins = 0;
         computerWins = 0;
     }
 }
 
-//game();
+// read in button clicks for player selection
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', getPlayerChoice);
+});
 
-function getPlayerChoice(e) {
-     console.log(e.target.innerText);
-     //return e.target.innerText;
-     game(e.target.innerText.toLowerCase())
-}
+// add div for displaying results, all console logs into DOM methods
 
-const btn = document.querySelector("button");
+// display running score and announce winner after 5 rounds
 
-btn.addEventListener("click", getPlayerChoice);
-
-// function buttonClicked(e) {
-//     const button = document.querySelectorAll('.rps-selection');
-//     console.log(button);
-// }
-
-// window.addEventListener('click', buttonClicked);
-
-// const buttons = document.querySelectorAll('button');
-// buttons.forEach((button) => {
-//     button.addEventListener('click', () => {
-//         console.log(button.id);
-//     })
-// });
+const display = document.querySelector('.display');
+display.textContent = "Hello, RPS!";
