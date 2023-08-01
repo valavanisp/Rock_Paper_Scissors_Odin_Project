@@ -3,6 +3,7 @@ console.log("Hello, Rock, Paper, Scissors!");
 // global variables for the game
 let playerWins = 0;
 let computerWins = 0;
+let ties = 0;
 
 // function to get computer selection
 function getComputerChoice() {
@@ -37,6 +38,7 @@ function playRound(playerSelection, computerSelection) {
         case 'rock':
             if (computerSelection === 'rock') {
                 result = "It's a tie!";
+                ties++;
             }
             else if (computerSelection === 'paper') {
                 result = "You lose! Paper beats rock!";
@@ -58,6 +60,7 @@ function playRound(playerSelection, computerSelection) {
             }
             else if (computerSelection === 'paper') {
                 result = "It's a tie!";
+                ties++;
             }
             else if (computerSelection === 'scissors') {
                 result = "You lose! Scissors beats paper!";
@@ -79,6 +82,7 @@ function playRound(playerSelection, computerSelection) {
             }
             else if (computerSelection === 'scissors') {
                 result = "It's a tie!";
+                ties++;
             }
             else {
                 result = "Hello darkness my old friend...";
@@ -97,7 +101,7 @@ function game(pChoice) {
 
     const display = document.querySelector('.display');
     display.textContent = "Player score: " + playerWins + 
-    "\tComputer score: " + computerWins;
+    "\tComputer score: " + computerWins + "\tTies: " + ties;
 
     if (playerWins === 5 || computerWins === 5) {
         console.log(playerWins);
@@ -119,6 +123,7 @@ function game(pChoice) {
         // reset counters to give option of playing again
         playerWins = 0;
         computerWins = 0;
+        ties = 0;
     }
 }
 
@@ -127,7 +132,3 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
     button.addEventListener('click', getPlayerChoice);
 });
-
-// add div for displaying results, all console logs into DOM methods
-
-// display running score and announce winner after 5 rounds
