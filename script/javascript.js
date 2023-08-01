@@ -100,6 +100,7 @@ function game(pChoice) {
     console.log(outcome);
 
     const display = document.querySelector('.display');
+    display.style.cssText = 'color: bisque; background: black;';
     display.textContent = "Player score: " + playerWins + 
     "\tComputer score: " + computerWins + "\tTies: " + ties;
 
