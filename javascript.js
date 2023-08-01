@@ -3,7 +3,6 @@ console.log("Hello, Rock, Paper, Scissors!");
 // global variables for the game
 let playerWins = 0;
 let computerWins = 0;
-let roundsPlayed = 0;
 
 // function to get computer selection
 function getComputerChoice() {
@@ -90,27 +89,34 @@ function playRound(playerSelection, computerSelection) {
     return result;
 }
 
-// game is to be played for 5 rounds
+// game is to be played until someone reaches 5 wins
 function game(pChoice) {
 
     let outcome = playRound(pChoice, getComputerChoice());
     console.log(outcome);
-    roundsPlayed++;
 
-    if (roundsPlayed === 5) {
+    const display = document.querySelector('.display');
+    display.textContent = "Player score: " + playerWins + 
+    "\tComputer score: " + computerWins;
+
+    if (playerWins === 5 || computerWins === 5) {
         console.log(playerWins);
         console.log(computerWins);
         if (playerWins > computerWins) {
+            display.textContent = "Player wins " + playerWins +
+            " to " + computerWins + "!";
             console.log("Player wins overall!");
         }
         else if (playerWins < computerWins) {
+            display.textContent = "Computer wins " + computerWins +
+            " to " + playerWins + "!";
             console.log("Computer wins overall!");
         }
         else {
-            console.log("Overall tie!");
+            display.textContent = "How did you get here?? A tie shouldn't have happened!";
+            console.log("How did you get here???");
         }
         // reset counters to give option of playing again
-        roundsPlayed = 0;
         playerWins = 0;
         computerWins = 0;
     }
@@ -125,6 +131,3 @@ buttons.forEach((button) => {
 // add div for displaying results, all console logs into DOM methods
 
 // display running score and announce winner after 5 rounds
-
-const display = document.querySelector('.display');
-display.textContent = "Hello, RPS!";
